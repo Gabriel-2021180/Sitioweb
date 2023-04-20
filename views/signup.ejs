@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/signup-style.css">
+    <title>Registro</title>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const previewImage = document.getElementById("preview-image");
+        const dropArea = document.getElementById("image-preview");
+
+        function handleImageUpload(file) {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onloadend = () => {
+            previewImage.src = reader.result;
+            previewImage.style.display = "block"; 
+          };
+        }
+
+        function handleDragOver(e) {
+          e.preventDefault();
+          dropArea.classList.add("image-preview-dragover");
+        }
+
+        function handleDragLeave(e) {
+          e.preventDefault();
+          dropArea.classList.remove("image-preview-dragover");
+        }
+
+        function handleDrop(e) {
+          e.preventDefault();
+          dropArea.classList.remove("image-preview-dragover");
+          const file = e.dataTransfer.files[0];
+          handleImageUpload(file);
+          dropArea.classList.add("image-preview-active");
+        }
+
+        const imageInput = document.getElementById("image-file");
+        imageInput.addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          handleImageUpload(file);
+          dropArea.classList.add("image-preview-active");
+        });
+
+        dropArea.addEventListener("dragover", handleDragOver);
+        dropArea.addEventListener("dragleave", handleDragLeave);
+        dropArea.addEventListener("drop", handleDrop);
+      });
+    </script>
+</head>
+<body>
+    
+    <div class="container">
+        <form class="form" action="/signup" method="post" enctype="multipart/form-data">
+          
+          <h2>Registro de usuario</h2>
+         
+          <div class="form-group">
+            <label for="nombres">Nombres:</label>
+            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresa tus nombres">
+          </div>
+          <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingresa tus apellidos">
+          </div>
+          <div class="form-group">
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu nombre de usuario">
+          </div>
+          <div class="form-group">
+            <label for="ci">Cédula de identidad:</label>
+            <input type="text" class="form-control" id="ci" name="ci" placeholder="Ingresa tu cédula de identidad">
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa tu dirección">
+          </div>
+          <div class="form-group">
+            <label for="fechanac">Fecha de nacimiento:</label>
+            <input type="date" class="form-control" id="fechanac" name="fechanac" placeholder="Ingresa tu fecha de nacimiento">
+          </div>
+          <div class="form-group">
+            <label for="phone">Teléfono:</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Ingresa tu teléfono">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña">
+          </div>
+          <div class="form-group">
+            <label for="image">Imagen de perfil:</label>
+            <div id="image-preview" class="image-preview">
+              <div class="drop-area">
+                <input type="file" id="image-file" accept=".jpg,.jpeg,.png" name="image">
+                <div class="choose-file">Elegir archivo</div>
+                <p>Arrastra y suelta tu imagen aquí</p>
+              </div>
+              <img id="preview-image" src="#" alt="Preview Image">
+            </div>
+          </div>
+          
+          
+          
+          <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
+      </div>
+      
+</body>
+</html>

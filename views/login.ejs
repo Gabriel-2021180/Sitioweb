@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Login</title>
+   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+   <link rel="stylesheet" href="../css/login-style.css">
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+
+<body>
+
+   <div class="overlay">
+      <form action="/login" method="post">
+         <div class="con">
+
+            <header class="head-form">
+                <% if (error && error.length > 0) { %>
+                  <div class="alert alert-danger" role="alert">
+                    <%= error[0] %>
+                  </div>
+                <% } %>
+               <h2>Iniciar sesion</h2>
+            </header>
+
+            <br>
+            <div class="field-set">
+               <span class="input-item"><i class="fa fa-user-circle"></i></span>
+               <input class="form-input" type="text" placeholder="Username" id="txt-input" name="username" required <% if (disableInputs) { %>disabled<% } %>> 
+               <br>
+
+               <span class="input-item"><i class="fa fa-key"></i></span>
+               <input class="form-input" type="password" placeholder="Password" id="pwd" name="password" required <% if (disableInputs) { %>disabled<% } %> >
+
+               <span><i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i></span>
+               <br>
+               <div id="error-message" class="error-message"></div>
+                 <br>
+                 <button type="submit" class="log-in" id="submit-button" <%= error && error.length > 0 && error[0].startsWith('Demasiadas solicitudes') ? 'disabled' : '' %> > Iniciar sesion </button>
+            </div>
+         </div>
+      </form>
+      <div class="other">
+         <button class="btn submits frgt-pass">Forgot Password</button>
+         <a href="/signup"><button  class="btn submits sign-up">Registrarse</button></a>
+      </div>
+   </div>
+
+</body>
+</html>

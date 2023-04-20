@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      /*js del index */
+$(document).ready(function(){
+    $('a[href^="#"]').on('click',function (e) {
+        e.preventDefault();
+
+        var target = this.hash;
+        var $target = $(target);
+
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top
+        }, 900, 'swing', function () {
+            window.location.hash = target;
+        });
+    });
+  });
+  const carousel = document.querySelector('.carousel');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+carousel.addEventListener('mousedown', (e) => {
+isDown = true;
+carousel.classList.add('active');
+startX = e.pageX - carousel.offsetLeft;
+scrollLeft = carousel.scrollLeft;
+});
+
+carousel.addEventListener('mouseleave', () => {
+isDown = false;
+carousel.classList.remove('active');
+});
+
+carousel.addEventListener('mouseup', () => {
+isDown = false;
+carousel.classList.remove('active');
+});
+
+carousel.addEventListener('mousemove', (e) => {
+if (!isDown) return;
+e.preventDefault();
+const x = e.pageX - carousel.offsetLeft;
+const walk = (x - startX) * 3;
+carousel.scrollLeft = scrollLeft - walk;
+});
+
+setInterval(nextSlide, 5000);
+
+/*js del index */ 
+    </script>
+</head>
+<body>
+    <%- include('../views/layouts/layout-index')%>  
+    <br>
+    <br>
+    <br>
+    <br>
+    <header>
+        <h1>Bufete de abogados Azurduy & asociados</h1>
+       
+      </header>
+      <main>
+       
+        <section class="features">
+          <h2 id="service">Servicios</h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="feature">
+                  <div class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <h3>Asesoría legal</h3>
+                  <p>Ofrecemos asesoramiento legal a empresas, organizaciones y particulares en una amplia gama de temas, desde asuntos corporativos y comerciales hasta cuestiones fiscales y de propiedad intelectual.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="feature">
+                  <div class="icon">
+                    <i class="fas fa-heart"></i>
+                  </div>
+                  <h3>Representación legal</h3>
+                  <p>Representación en diversos procesos legales, incluyendo disputas civiles, litigios penales, asuntos de derecho laboral, derecho inmobiliario, derecho de familia, derecho mercantil y otros.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="feature">
+                  <div class="icon">
+                    <i class="fas fa-cog"></i>
+                  </div>
+                  <h3>Consultoría legal</h3>
+                  <p>Ayudamos a cumplir con las regulaciones y normas de la industria, lo que puede incluir el asesoramiento sobre cuestiones ambientales, de privacidad, de seguridad y de cumplimiento de regulaciones específicas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        
+        
+    
+  </div>
+</section>
+
+        <h2 id="about">Sobre Nosotros</h2>
+        <div class="carousel">
+          <div class="card">
+            <h2>Objetivo</h2>
+            <p>Brindar la mejor atención, asesoramiento y representación legal a nuestros
+              clientes.</p>
+          </div>
+          <div class="card">
+            <h2>Misión</h2>
+            <p>Brindar a nuestros clientes una asesoría legal de alta calidad y un servicio 
+              personalizado que satisfaga sus necesidades.</p>
+          </div>
+          <div class="card">
+            <h2>Visión</h2>
+            <p> Brindar un buen servicio de asesoramiento en material penal a los clientes.
+            </p>
+          </div>
+          
+          
+        </div>
+        
+        
+        <h2 id="contact">Contacto</h2>
+        <p style="text-align: center;">Si desea ponerse en contacto con nosotros, puede hacerlo a través del siguiente formulario:</p>
+        <form>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre"><br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email"><br><br>
+          <label for="mensaje">Mensaje:</label><br>
+          <textarea id="mensaje" name="mensaje" rows="5"></textarea><br><br>
+          <input type="submit" value="Enviar">
+        </form>
+      </main>
+      <footer>
+        <p>Bufete de abogados Azurduy & asociados.<br> 
+          Dirección: Edificio Alborada nro13, Juan de la Riva.</p>
+      </footer>
+  
+</body>
+</html>
