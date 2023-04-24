@@ -21,7 +21,7 @@ async function sendVerificationEmail(email, token) {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Verifica tu correo electrónico',
-      text: `Por favor verifica tu correo electrónico haciendo clic en el siguiente enlace: http://localhost:3000/verify-email?token=${token}`,
+      text: `Por favor verifica tu correo electrónico haciendo clic en el siguiente enlace: https://bufeteazurduy.onrender.com/verify-email?token=${token}`,
     };
   
     // Envía el correo electrónico
