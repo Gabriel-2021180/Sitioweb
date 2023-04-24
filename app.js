@@ -4,8 +4,13 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const login = require('./Router/login');
 const db = require('./db');
+// Asegúrate de que la ruta sea correcta
+
+
+
 const { body, validationResult } = require('express-validator');
 const app = express();
+require('dotenv').config();
 // Configurar express
 app.use(express.urlencoded({ extended: true }));
 

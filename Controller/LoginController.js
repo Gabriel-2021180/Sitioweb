@@ -12,10 +12,37 @@ exports.getLogin = (req, res) => {
     res.render('login', { error: req.flash('error'), disableInputs, remainingTime });
 };
 
-exports.postLogin = (req, res, next) => {
-    passport.authenticate('local', { successRedirect: '/index', failureRedirect: '/', failureFlash: true })(req, res, next);
+exports.postLogin = async (req, res, next) => {
+    const { username } = req.body;
+
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            req.flash('error_msg', 'Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
+            return res.redirect('/');
+        }
+
+        if (user && !user.emailVerified) {
+            req.flash('error_msg', 'Por favor verifica tu correo electrónico antes de iniciar sesión.');
+            return res.redirect('/');
+        }
+
+        // Autenticar al usuario
+        passport.authenticate('local', {
+            successRedirect: '/index',
+            failureRedirect: '/',
+            failureFlash: true,
+        })(req, res, next);
+    } catch (err) {
+        console.error('Error al verificar el correo electrónico:', err);
+        req.flash('error_msg', 'Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
+        res.redirect('/');
+    }
 };
 
+
+  
 exports.getIndex = (req, res) => {
     res.render('index');
 };

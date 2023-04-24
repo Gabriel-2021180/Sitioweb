@@ -6,8 +6,10 @@ const SignupController = require('../Controller/SignUpController');
 const ProfileController = require('../Controller/ProfileController');
 const { body } = require('express-validator');
 const { RateLimiterMemory } = require('rate-limiter-flexible');
-const multer = require('multer')
-const upload=multer()
+const multer = require('multer');
+const emailTransporter = require('../configs/emailConfig');
+const User = require('../Model/user'); // Asegúrate de que la ruta sea correcta
+const upload = multer();
 const rateLimiter = new RateLimiterMemory({
   points: 4,
   duration: 60 * 5,
@@ -15,7 +17,28 @@ const rateLimiter = new RateLimiterMemory({
 
 router.get('/', LoginController.getLogin);
 router.get('/signup', SignupController.getSignup);
+router.get('/verify-email', async (req, res) => {
+  const token = req.query.token;
 
+  try {
+    const user = await User.findOne({ emailVerificationToken: token });
+
+    if (!user) {
+      req.flash('error_msg', 'El enlace de verificación no es válido o ha expirado.');
+      return res.redirect('/login');
+    }
+
+    user.emailVerified = true;
+    user.emailVerificationToken = undefined;
+    await user.save();
+    req.flash('success_msg', 'Correo electrónico verificado exitosamente. Ahora puedes iniciar sesión.');
+    res.redirect('/');
+  } catch (error) {
+    console.error('Error al verificar el correo electrónico:', error);
+    req.flash('error_msg', 'Ocurrió un error al verificar tu correo electrónico. Por favor, inténtalo de nuevo.');
+    res.redirect('/signup');
+  }
+});
 router.post(
   '/signup',
   [
@@ -52,8 +75,6 @@ router.post(
   },
   LoginController.postLogin
 );
-
-
 router.get('/index', /*LoginController.isAuthenticated,*/ LoginController.getIndex);
 router.get('/logout', LoginController.getLogout);
 router.get('/login', LoginController.getLogin);
