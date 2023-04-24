@@ -4,6 +4,8 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const login = require('./Router/login');
 const db = require('./db');
+const email = require('../configs/emailConfig'); 
+
 // Asegúrate de que la ruta sea correcta
 
 
