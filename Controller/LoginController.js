@@ -48,13 +48,18 @@ exports.getIndex = (req, res) => {
 };
 
 exports.getLogout = (req, res) => {
-    req.logout();
-    res.redirect('/');
-};
+    req.logout(function (err) {
+        if (err) {
+            console.error(err);
+        }
+        res.redirect('/'); // Redirige al usuario a la página de inicio
+    });
+  };
+  
 
-exports.getIndex = (req, res) => {
+/*exports.getIndex = (req, res) => {
     res.render('index');
-};
+};*/
 
 exports.isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {

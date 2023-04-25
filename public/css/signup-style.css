@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('https://storage.googleapis.com/primerstorage/logo%20bufete.png');
+    background-image: url('https://storage.googleapis.com/primerstorage/loginlogo.png');
     background-color: #ffffff;
     background-repeat: no-repeat;
     background-position: center;
@@ -80,13 +80,13 @@ form .con {
     font-size: 16px;
     border-radius: 5px;
     border: none;
-    background-color: #007bff;
+    background-color: #000000;
     color: #fff;
     cursor: pointer;
   }
   
   .btn:hover {
-    background-color: #0069d9;
+    background-color: #3b0202;
   }
   .drop-area {
     position: relative;
@@ -113,7 +113,7 @@ form .con {
   
   .choose-file {
     padding: 8px 20px;
-    background-color: #007bff;
+    background-color: #570202;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;

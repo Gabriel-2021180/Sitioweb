@@ -9,7 +9,7 @@ const userSchema = new Schema({
     apellidos: {type:String,required:true,unique:true},
     username: {type:String,required:true,unique:true},
     ci: {type:String,required:true,unique:true},
-    direccion: {type:String,required:true,unique:true},
+    direccion: {type:String,required:true},
     rol: String,
     fechanac: Date,
     phone: {type:String,required:true,unique:true},

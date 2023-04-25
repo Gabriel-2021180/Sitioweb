@@ -75,7 +75,10 @@ router.post(
   },
   LoginController.postLogin
 );
-router.get('/index', /*LoginController.isAuthenticated,*/ LoginController.getIndex);
+router.get('/index', (req, res) => {
+  res.render('index', { isLoggedIn: req.isAuthenticated() });
+});
+//router.get('/index', /*LoginController.isAuthenticated,*/ LoginController.getIndex);
 router.get('/logout', LoginController.getLogout);
 router.get('/login', LoginController.getLogin);
 router.get('/profile',LoginController.isAuthenticated,ProfileController.getProfile);
