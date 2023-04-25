@@ -14,26 +14,6 @@ const emailTransporter = require('../configs/emailConfig');
 exports.getSignup = (req, res) => {
     res.render('signup');
 };
-//antes de cualquier cosa para evitar la acumulacion de datos basura en nuestra base de datos vamos a verificar la validez de ese email
-async function sendVerificationEmail(email, token) {
-    // Configura el contenido del correo electrónico
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: 'Verifica tu correo electrónico',
-      text: `Por favor verifica tu correo electrónico haciendo clic en el siguiente enlace: https://bufeteazurduy.onrender.com/verify-email?token=${token}`,
-    };
-  
-    // Envía el correo electrónico
-    try {
-      await emailTransporter.sendMail(mailOptions);
-      console.log('Correo de verificación enviado');
-    } catch (error) {
-      console.error('Error al enviar el correo de verificación:', error);
-    }
-  }
-  
-  
   
 //usando el metodo post para este index
 exports.postSignup = async (req, res) => {
@@ -120,10 +100,16 @@ exports.postSignup = async (req, res) => {
     });
 
     try {
-        await newUser.save();
-    
-        req.flash('success_msg', 'Te has registrado exitosamente. Por favor verifica tu correo electrónico.');
-        res.redirect('/');
+      await newUser.save();
+
+      // Programa la eliminación del usuario después de 40 minutos si no se verifica su correo electrónico
+      const deleteJob = schedule.scheduleJob(Date.now() + 30 * 60 * 1000, async function () {
+        const user = await User.findById(newUser._id);
+        if (!user.emailVerified) {
+          await User.findByIdAndDelete(newUser._id);
+          console.log(`Usuario no verificado eliminado: ${user.username}`);
+        }
+      })
       } catch (error) {
         if (error.code === 11000) {
           const duplicatedField = Object.keys(error.keyValue)[0];
