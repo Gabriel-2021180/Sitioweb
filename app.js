@@ -6,7 +6,7 @@ const login = require('./Router/login');
 const db = require('./db');
 console.log('Importando configuración de correo electrónico...');
 const email = require('./configs/emailConfig'); 
-
+const loginRoute = require('./Router/loginMovil');
 // Asegúrate de que la ruta sea correcta
 
 
@@ -53,6 +53,13 @@ app.use(express.static('public'));
 
 // Configurar rutas
 app.use('/', login);
+app.use('/loginAndroid', loginRoute);
+// En tu archivo principal de la aplicación (por ejemplo, app.js)
+app.post('/testMV', (req, res) => {
+  console.log('Username:', req.body.username);
+  console.log('Password:', req.body.password);
+  res.json({ message: 'Test route' });
+});
 
 // Iniciar servidor
 app.listen(3000, () => {

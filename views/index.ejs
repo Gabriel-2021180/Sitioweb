@@ -1,218 +1,163 @@
 <!DOCTYPE HTML>
-<!--
-	Miniport by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Bufete de abogados</title>
+		<title>Bufete de abogados Azurduy</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		
-		<link rel="stylesheet" href="../css/index-style.css">
+		<link rel="stylesheet" href="/css/main.css" />
+		<link rel="stylesheet" href="/sass/main.scss">
+		<noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
 	</head>
-	<body class="is-preload">
-
-		<!-- Nav -->
-			<nav id="nav">
-				<ul class="container">
-					<li><a href="#top">Inicio</a></li>
-					<li><a href="#work">Sobre Nosotros</a></li>
-					<li><a href="#portfolio">Informacion Adicional</a></li>
-					<li><a href="#contact">Contactanos</a></li>
-					<li id="loginLogoutLink">
-						<% if (isLoggedIn) { %>
-						  <a href="/logout" onclick="logOut()">Logout</a>
-						<% } else { %>
-						  <a href="/">Login</a>
-						<% } %>
-					  </li>
-				</ul>
-			</nav>
-
-		<!-- Home -->
-			<article id="top" class="wrapper style1">
-				<div class="container">
-					<div class="row">
-						<div class="col-4 col-5-large col-12-medium">
-							<span class="image fit"><img src="https://storage.googleapis.com/primerstorage/logoBSinfondito.png" alt="" /></span>
-						</div>
-						<div class="col-8 col-7-large col-12-medium">
-							<header>
-								<h1>Azurduy Y Asociados</h1>
-							</header>
-							<p>Somos un <strong>Bufete de Abogados</strong>, comprometido con brindar servicios legales de alta calidad. Nuestro equipo de profesionales experimentados trabaja arduamente para garantizar la satisfacción de nuestros clientes y proteger sus derechos.</p>
-							<a href="#work" class="button large scrolly">Conozca más sobre nuestros servicios</a>
-						</div>
+	<body class="is-preload landing">
+		<div id="page-wrapper">
+			<%-include('../views/layouts/layout-index.ejs')%>
+			
+			<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2>Azurduy & Asociados</h2>
+							<p>NOSOTROS LUCHAMOS. <BR>
+								USTED GANA. ELLOS PAGAN.</p>
+						</header>
+						<span class="image"><img src="https://storage.googleapis.com/primerstorage/logofondo.png" alt="" /></span>
 					</div>
-				</div>
-			</article>
+					<a href="#one" class="goto-next scrolly">Next</a>
+				</section>
 
-		<!-- Work -->
-			<article id="work" class="wrapper style2">
-				<div class="container">
-					<header>
-						<h2>Sobre Nosotros</h2>
-						<p>En este apartado concera cual es nuestra mision,Visiom y Objetivo </p>
-					</header>
-					<div class="row aln-center">
-						<div class="col-4 col-6-medium col-12-small">
-							<section class="box style1">
-								
-								<span class="icon featured fa-life-ring"></span>
-								<h3>Objetivo</h3>
-								<p> Ofrecer atención y soluciones legales eficientes mediante un sistema de gestión de casos avanzado y personalizado, con el objetivo de aumentar la satisfacción del cliente y la rentabilidad del bufete.</p>
-							</section>
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
-							<section class="box style1">
-								<span class="icon solid featured fa-gavel"></span>
-								<h3>Mision</h3>
-								<p>Ofrecer atención y representación legal óptima a clientes mediante soluciones integrales y eficientes, con un enfoque en tecnología y personal altamente capacitado, buscando liderazgo en el ramo, satisfacción del cliente y crecimiento sostenible.</p>
-							</section>
-						</div>
-						<div class="col-4 col- 6-medium col-12-small">
-							<section class="box style1">
-								<span class="icon featured fa-eye"></span>
-								<h3>vision</h3>
-								<p>Brindar un buen servicio de asesoramiento en material penal y tambien Brindar un buen servicio de asesoramiento en Legal</p></div>
-					<footer>
-						<p>Ver los distintos trabajos </p>
-						<a href="#portfolio" class="button large scrolly">Mostrar los trabajos</a>
-					</footer>
-				</div>
-			</article>
-
-		<!-- Portfolio -->
-			<article id="portfolio" class="wrapper style3">
-				<div class="container">
-					<header>
-						<h2>Sobre Nosotros</h2>
-						<p>En este apartado contara con los distintos abogados</p>
-					</header>
-					<div class="row">
-						<div class="col-4 col-6-medium col-12-small">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-								<h3><a href="#">Abogado1</a></h3>
-								<p>Una ayuda de mas no sienta mal, especialista en su campo de trabajo</p>
-							</article>
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-								<h3><a href="#">Abogado 2</a></h3>
-								<p>Una ayuda de mas no sienta mal, especialista en su campo de trabajo</p>
-							</article>
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-								<h3><a href="#">Abogado 3</a></h3>
-								<p>Una ayuda de mas no sienta mal, especialista en su campo de trabajo</p>
-							</article>
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-								<h3><a href="#">Abogado 4</a></h3>
-								<p>Una ayuda de mas no sienta mal, especialista en su campo de trabajo</p>
-							</article>
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
-								<h3><a href="#">Abogado 5</a></h3>
-								<p>Una ayuda de mas no sienta mal, especialista en su campo de trabajo</p>
-							</article>
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
-								<h3><a href="#">Abogado 6</a></h3>
-								<p>Una ayuda de mas no sienta mal, especialista en su campo de trabajo</p>
-					</div>
-					<footer>
-						<p>Quieres mas Ayuda?</p>
-						<a href="#contact" class="button large scrolly">Enviar un mensaje</a>
-					</footer>
-				</div>
-			</article>
-
-		<!-- Contact -->
-			<article id="contact" class="wrapper style4">
-				<div class="container medium">
-					<header>
-						<h2>Envianos un mensaje</h2>
-						<p>estamos para ayudarte</p>
-					</header>
-					<div class="row">
-						<div class="col-12">
-							<form method="post" action="#">
-								<div class="row">
-									<div class="col-6 col-12-small">
-										<input type="text" name="name" id="name" placeholder="Name" />
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="text" name="email" id="email" placeholder="Email" />
-									</div>
-									<div class="col-12">
-										<input type="text" name="subject" id="subject" placeholder="Subject" />
-									</div>
-									<div class="col-12">
-										<textarea name="message" id="message" placeholder="Message"></textarea>
-									</div>
-									<div class="col-12">
-										<ul class="actions">
-											<li><input type="submit" value="enviar" /></li>
-											<li><input type="reset" value="borrar formulario" class="alt" /></li>
-										</ul>
-									</div>
+			<!-- One -->
+				<section id="one" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="https://storage.cloud.google.com/primerstorage/pic02.jpg" alt="" /></span>
+					<div class="content">
+						<div class="container">
+							<div class="row">
+								<div class="col-4 col-12-medium">
+									<header>
+										<h2>Estudio Jurídico</h2>
+										<p>Azurduy & Asociados</p>
+									</header>
 								</div>
-							</form>
-						</div>
-						<div class="col-12">
-							<hr />
-							<h3>Siguenos</h3>
-							<ul class="social">
-								<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-								<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-								<li><a href="#" class="icon brands fa-tumblr"><span class="label">Tumblr</span></a></li>
-								<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
-								<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-								<!--
-								<li><a href="#" class="icon solid fa-rss"><span>RSS</span></a></li>
-								<li><a href="#" class="icon brands fa-instagram"><span>Instagram</span></a></li>
-								<li><a href="#" class="icon brands fa-foursquare"><span>Foursquare</span></a></li>
-								<li><a href="#" class="icon brands fa-skype"><span>Skype</span></a></li>
-								<li><a href="#" class="icon brands fa-soundcloud"><span>Soundcloud</span></a></li>
-								<li><a href="#" class="icon brands fa-youtube"><span>YouTube</span></a></li>
-								<li><a href="#" class="icon brands fa-blogger"><span>Blogger</span></a></li>
-								<li><a href="#" class="icon brands fa-flickr"><span>Flickr</span></a></li>
-								<li><a href="#" class="icon brands fa-vimeo"><span>Vimeo</span></a></li>
-								-->
-							</ul>
-							<hr />
+								<div class="col-4 col-12-medium">
+									<p>En nuestro bufete de abogados, nos enorgullece ofrecer servicios de asesoramiento legal de alta calidad a nuestros clientes.
+										Contamos con un equipo de abogados altamente capacitados y experimentados que están comprometidos en brindar soluciones legales efectivas y personalizadas a cada caso. Nos enfocamos en comprender las necesidades y objetivos de nuestros clientes y trabajamos incansablemente para garantizar su éxito.
+									</p>
+								</div>
+								<div class="col-4 col-12-medium">
+									<p>Desde asuntos legales complejos hasta consultas legales cotidianas, estamos aquí para ayudarte en cada paso del camino. Con nuestro enfoque orientado al cliente y nuestra amplia experiencia legal, puedes confiar en nosotros para proteger tus derechos y obtener los resultados que deseas. ¡Contáctanos hoy para descubrir cómo podemos ayudarte!</p>
+								</div>
+							</div>
 						</div>
 					</div>
-					<footer>
-						<ul id="copyright">
-							<li>&copy; Derechos reservados</li><li>Por: <a href="http://html5up.net">Los Hijos del Bicho</a></li>
-						</ul>
-					</footer>
-				</div>
-			</article>
+					<a href="#two" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Two -->
+				<section id="two" class="spotlight style2 right">
+					<span class="image fit main"><img src="https://storage.googleapis.com/primerstorage/pic03.jpg" alt="" /></span>
+					<div class="content">
+						<br><br>
+						<header>
+							<h2>Visión</h2>
+							<p>Ofrecer servicios de asesoramiento legal de calidad en materia penal y otras áreas del derecho. Asi como brindar a nuestros clientes un servicio integral, efectivo y confiable, que les permita tomar decisiones informadas y proteger sus derechos.  </p>
+						</header>
+						
+						
+					</div>
+					<a href="#three" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Three -->
+				<section id="three" class="spotlight style3 left">
+					<span class="image fit main bottom"><img src="https://storage.googleapis.com/primerstorage/pic04.jpg" alt="" /></span>
+					<div class="content">
+						<br><br>
+						<header>
+							<h2>Misión</h2>
+							<p>Ofrecer atención y representación legal óptima a clientes mediante soluciones integrales y eficientes, con un enfoque en tecnología y personal altamente capacitado, buscando liderazgo en el ramo, satisfacción del cliente y crecimiento sostenible.</p>
+						</header>
+						
+						
+					</div>
+					<a href="#four" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Four -->
+				<section id="four" class="wrapper style1 special fade-up">
+					<div class="container">
+						<header class="major">
+							<h2>¿Porqué elegirnos?</h2>
+							
+						</header>
+						<div class="box alt">
+							<div class="row gtr-uniform">
+								
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-comment"></span>
+									<h3>Comunicación directa</h3>
+									</section>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-glasses"></span>
+									<h3>Atención personalizada</h3>
+									</section>
+								
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-user-graduate"></span>
+									<h3>Mas de 30 años de experiencia combinada entre nuestros abogados</h3>
+									</section>
+								
+							</div>
+						</div>
+						
+					</div>
+				</section>
+
+			<!-- Five -->
+				<section id="five" class="wrapper style2 special fade">
+					
+					<div class="container">
+						
+						<header>
+							<h2>Regístrate ahora para obtener asesoramiento legal personalizado y exclusivo.</h2>
+							
+						</header>
+						<a href="#" class="button primary large">Regístrate</a>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands alt fa-whatsapp"><span class="label">Twitter</span></a>
+						<p>77753454</p></li>
+						<li><a href="#" class="icon solid alt fa-phone"><span class="label">Email</span></a>
+						<p>2-2204548</p></li>
+						
+						
+						<li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a>
+						<p>ivanazurduye@hotmail.com</p></li>
+					</ul>
+					<ul class="icons">
+					<li><a href="#" class="icon solid alt fa-map-marked-alt"><span class="label">GitHub</span></a>
+						</li>
+						<li><p>Calle Juan de la Riva Nº1406,Esq. Loayza Edif. "Alborada". Piso 13 Of. 1301</p></li>
+					</ul>
+						<ul class="copyright">
+						<li>&copy; 2023 Derechos reservados. Los hijos del bicho</li>
+						<li><a href="#" class="icon brands alt fa-galactic-republic"></a></li>
+					</ul>
+				</footer>
+
+		</div>
 
 		<!-- Scripts -->
-			<script src="../public/javascript/jquery.min.js"></script>
-			<script src="../public/javascript/jquery.scrolly.min.js"></script>
-			<script src="../public/javascript/browser.min.js"></script>
-			<script src="../public/javascript/breakpoints.min.js"></script>
-			<script src="../public/javascript/util.js"></script>
-			<script src="../public/javascript/main.js"></script>
+			<script src="/javascript/jquery.min.js"></script>
+			<script src="/javascript/jquery.scrolly.min.js"></script>
+			<script src="/javascript/jquery.dropotron.min.js"></script>
+			<script src="/javascript/jquery.scrollex.min.js"></script>
+			<script src="/javascript/browser.min.js"></script>
+			<script src="/javascript/breakpoints.min.js"></script>
+			<script src="/javascript/util.js"></script>
+			<script src="/javascript/main.js"></script>
 
 	</body>
 </html>

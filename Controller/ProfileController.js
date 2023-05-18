@@ -1,3 +1,3 @@
 exports.getProfile = (req, res) => {
-    res.render('profile');
+    res.render('profile',{ user: req.user });
 };

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <style>
+    #messages {
+      height: 300px;
+      overflow-y: scroll;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chat</h1>
+  <div id="messages"></div>
+  <form id="chat-form">
+    <input type="text" id="message-input" placeholder="Escribe tu mensaje...">
+    <button type="submit">Enviar</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const $messages = $("#messages");
+      const $messageInput = $("#message-input");
+
+      $("#chat-form").on("submit", function(event) {
+        event.preventDefault();
+        const message = $messageInput.val().trim();
+
+        if (message) {
+          $messages.append(`<div class="message">Tú: ${message}</div>`);
+          $messageInput.val("");
+
+          $.ajax({
+            url: "/chat",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({ message }),
+            success: function(response) {
+              const chatbotMessage = response.message;
+              $messages.append(`<div class="message">Chatbot: ${chatbotMessage}</div>`);
+            },
+            error: function() {
+              $messages.append(`<div class="message">Error al obtener respuesta del chatbot.</div>`);
+            },
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

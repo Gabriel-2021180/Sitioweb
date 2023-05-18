@@ -1,15 +1,51 @@
 
-<link rel="stylesheet" href="../css/index-style.css">
+<head>
+  <title>Bufete de abogados Azurduy</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/sass/main.scss">
+  <noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload landing">
+  <div id="page-wrapper">
 
-<nav>
-
-  <a href="#about">SOBRE NOSOTROS</a>
-  <a href="#service">SERVICIOS</a>
-  <a href="#contact">CONTACTOS</a>
-  <div id="#indicator"></div>
-  <div id="color-line"></div>
-  <div class="logo-container">
-      <a href="/index"><img class="logo" src="https://storage.googleapis.com/primerstorage/logo_sin_fondo-removebg-preview.png" alt="Logo de la empresa"></a>
-    </div>
-</nav>
+    <!-- Header -->
+      <header id="header">
+        <h1 id="logo"><a href="/index">Azurduy & Asociados</a></h1>
+        <nav id="nav">
+          <ul>
+            <li><a href="/index">Inicio</a></li>
+            <li><a href="/index">Servicios</a></li>
+            <li><a href="/index">Sobre Nosotros</a></li>
+            <li><a href="/index">Contáctenos</a></li>
+            <!--<li>
+              <a href="#">Layouts</a>
+              <ul>
+                <li><a href="left-sidebar.html">Left Sidebar</a></li>
+                <li><a href="right-sidebar.html">Right Sidebar</a></li>
+                <li><a href="no-sidebar.html">No Sidebar</a></li>
+                <li>
+                  <a href="#">Submenu</a>
+                  <ul>
+                    <li><a href="#">Option 1</a></li>
+                    <li><a href="#">Option 2</a></li>
+                    <li><a href="#">Option 3</a></li>
+                    <li><a href="#">Option 4</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="elements.html">Elements</a></li>-->
+            <% if (!user) { %>
+              <li><a href="/signup" class="button fit">Regístrate</a></li>
+              <li><a href="/" class="button primary">Iniciar Sesión</a></li>
+              <% } else { %>
+              <li><a href="/profile" class="button primary">Perfil</a></li>
+              <li><a href="/" class="button fit">Cerrar Sesión</a></li>
+              <% } %>
+            
+          </ul>
+        </nav>
+      </header>
 

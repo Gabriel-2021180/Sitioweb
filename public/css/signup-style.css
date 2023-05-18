@@ -7,8 +7,9 @@
 }
 
 body {
-    background-image: url('https://storage.googleapis.com/primerstorage/loginlogo.png');
-    background-color: #ffffff;
+    /*background-image: url('https://storage.googleapis.com/primerstorage/loginlogo.png'); */
+
+    background-color: #080710;
     background-repeat: no-repeat;
     background-position: center;
     font-family: 'Vibur', cursive;
@@ -189,4 +190,23 @@ form .con {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  /*estilo para botno flotante */
+ 
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:rgb(105, 109, 108);
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
+}
   

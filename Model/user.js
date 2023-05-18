@@ -17,6 +17,7 @@ const userSchema = new Schema({
     password: String,
     image: String,
     emailVerificationToken: String,
+    //rol o el nombre que le vayan a poner: Int o bool no se cauntos tipos van a haber
     emailVerified: { type: Boolean, default: false },
 });
 
