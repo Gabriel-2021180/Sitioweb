@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/signup-style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>Registro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/signup-style.css">
+  
+<title>Registro</title>
     <script>
       window.addEventListener("DOMContentLoaded", () => {
         const previewImage = document.getElementById("preview-image");
@@ -49,67 +50,125 @@
         dropArea.addEventListener("dragover", handleDragOver);
         dropArea.addEventListener("dragleave", handleDragLeave);
         dropArea.addEventListener("drop", handleDrop);
+
+        //validaciones colocadas
+        var nombres = document.getElementById("nombres");
+        nombres.addEventListener("input", function() {
+          // Obtén el valor actual del campo de entrada
+          const inputValue = nombres.value;
+          // Comprueba si el valor coincide con la expresión regular
+          if (!/^[a-zA-Z\s]+$/.test(inputValue)) {
+            // Si no coincide, elimina el último carácter ingresado
+            nombres.value = inputValue.slice(0, -1);
+          }
+        });
+        var apellidos = document.getElementById("apellidos");
+        apellidos.addEventListener("input", function() {
+          const inputValue = apellidos.value;
+          if (!/^[a-zA-Z\s]+$/.test(inputValue)) {
+            apellidos.value = inputValue.slice(0, -1);
+          }
+        });
+        var ci = document.getElementById("ci");
+        ci.addEventListener("input", function() {
+          console.log("ci")
+          const inputValue = ci.value;
+          if (!/^\d+([a-zA-Z])?$/i.test(inputValue)) {
+            ci.value = inputValue.slice(0, -1);
+          }
+        });
+        var phone = document.getElementById("phone");
+        phone.addEventListener("input", function() {
+          const inputValue = phone.value;
+          if (!/^[0-9]+$/.test(inputValue)) {
+            phone.value = inputValue.slice(0, -1);
+          }
+        });
       });
+
+      //validacion de imagen:
+      function validateForm() {
+        var fileInput = document.getElementById("image-file");
+        if (fileInput.files.length < 1) {
+          alert("Por favor, elige un archivo.");
+          return false;
+        }
+        var file = fileInput.files[0];
+        var fileName = file.name.toLowerCase();
+        if (!(fileName.endsWith(".jpeg") || fileName.endsWith(".jpg") || fileName.endsWith(".png"))) {
+          alert("Elige un archivo con formato JPEG o PNG.");
+          return false;
+        }
+        var fechaNacimiento = document.getElementById("fechanac").value;
+        var today = new Date();
+        var birthDate = new Date(fechaNacimiento);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        if (age < 18) {
+          alert("Debes tener al menos 18 años para registrarte.");
+          return false;
+        }
+        // Todas las validaciones pasaron
+        return true;
+      }
     </script>
 </head>
 
 <body>
 
-  
-
     <div class="container">
-      
-        <form class="form" action="/signup" method="post" enctype="multipart/form-data">
-          
+        <form class="form" action="/signup" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
           <h2>Registro de usuario</h2>
-          
           <div class="form-group">
             <label for="nombres">Nombres:</label>
-            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresa tus nombres">
+            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresa tus nombres" maxlength="30" required>
           </div>
           <div class="form-group">
             <label for="apellidos">Apellidos:</label>
-            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingresa tus apellidos">
+            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingresa tus apellidos" maxlength="30" required>
           </div>
           <div class="form-group">
-            <label for="username">Nombre de usuario:</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu nombre de usuario">
+            <label for="username">Nombre de Cliente(Es el nombre con el que aparecerá):</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu nombre de usuario" maxlength="30" required>
             <% if (locals.error_msg && locals.username) { %>
               <small class="error-message"><%= error_msg %></small>
             <% } %>
           </div>
           <div class="form-group">
             <label for="ci">Cédula de identidad:</label>
-            <input type="text" class="form-control" id="ci" name="ci" placeholder="Ingresa tu cédula de identidad">
+            <input type="text" class="form-control" id="ci" name="ci" placeholder="Ingresa tu cédula de identidad" maxlength="8" required>
             <% if (locals.error_msg && locals.ci) { %>
               <small class="error-message"><%= error_msg %></small>
             <% } %>
           </div>
           <div class="form-group">
             <label for="direccion">Dirección:</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa tu dirección">
+            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa tu dirección" maxlength="30" required>
           </div>
           <div class="form-group">
             <label for="fechanac">Fecha de nacimiento:</label>
-            <input type="date" class="form-control" id="fechanac" name="fechanac" placeholder="Ingresa tu fecha de nacimiento">
+            <input type="date" class="form-control" id="fechanac" name="fechanac" placeholder="Ingresa tu fecha de nacimiento" max="2006-01-01" required>
           </div>
           <div class="form-group">
             <label for="phone">Teléfono:</label>
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="Ingresa tu teléfono">
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Ingresa tu teléfono" maxlength="8" required>
             <% if (locals.error_msg && locals.phone) { %>
               <small class="error-message"><%= error_msg %></small>
             <% } %>
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico" maxlength="50" required>
             <% if (locals.error_msg && locals.email) { %>
               <small class="error-message"><%= error_msg %></small>
             <% } %>
           </div>
           <div class="form-group">
             <label for="password">Contraseña:</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña" maxlength="15" required>
           </div>
           <% if (locals.success_msg) { %>
             <div class="alert alert-success">
@@ -129,18 +188,12 @@
               <img id="preview-image" src="#" alt="Preview Image">
             </div>
           </div>
-          
-          
-          
+
           <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>
-         <a href="#" class="float">
+        <a href="#" class="float">
           <i class="fa fa-plus my-float"></i>
           </a>
       </div>
-      <a href="/" class="float">
-        <i class="bi bi-skip-backward"></i>
-        </a>
-      
 </body>
 </html>

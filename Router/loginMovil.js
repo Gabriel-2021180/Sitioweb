@@ -19,10 +19,24 @@ router.post('/', async (request, response, next) => {
     if (user) {
       const isMatch = await user.comparePassword(password);
       if (isMatch) {
-        response.json({ success: true, message: 'Inicio de sesión exitoso' });
+        // Crear un objeto de usuario para enviar como respuesta
+        let userResponse = {
+          nombres: user.nombres,
+          apellidos: user.apellidos,
+          username: user.username,
+          ci: user.ci,
+          direccion: user.direccion,
+          rol: user.rol,
+          fechanac: user.fechanac,
+          phone: user.phone,
+          email: user.email,
+          image: user.image,
+          emailVerified: user.emailVerified
+        };
+        response.json({ success: true, message: 'Inicio de sesión exitoso', user: userResponse });
       } else {
         response.json({ success: false, message: 'Nombre de usuario o contraseña incorrecta' });
-      }
+      }      
     } else {
       response.json({ success: false, message: 'Nombre de usuario o contraseña incorrecta' });
     }
