@@ -1,17 +1,20 @@
   const express = require('express');
   const passport = require('passport');
+  const Caso = require('../Model/casos');
   const router = express.Router();
   const LoginController = require('../Controller/LoginController');
   const SignupController = require('../Controller/SignUpController');
   const ProfileController = require('../Controller/ProfileController');
+  const BufeteUserController=require('../Controller/infobufete');
   const { body } = require('express-validator');
   const { RateLimiterMemory } = require('rate-limiter-flexible');
   const multer = require('multer');
   const emailTransporter = require('../configs/emailConfig');
   const citasController = require('../Controller/CitasController');
-
-
+  const casosController=require('../Controller/casoController');
+  const ChatController = require('../Controller/ChatController');
   const User = require('../Model/user'); // Asegúrate de que la ruta sea correcta
+const bufeteUser = require('../Model/bufeteUser');
   const upload = multer();
   const rateLimiter = new RateLimiterMemory({
     points: 4,
@@ -85,14 +88,74 @@
   router.get('/logout', LoginController.getLogout);
   router.get('/login', LoginController.getLogin);
   router.get('/profile',LoginController.isAuthenticated,ProfileController.getProfile);
-  const ChatController = require('../Controller/ChatController');
+  
+  router.get('/abogados', BufeteUserController.getAbogados);
+  router.get('/perfil/:id', BufeteUserController.getPerfilAbogado);
+  router.post('/solicitar', BufeteUserController.postSolicitudAbogado);
+  router.get('/mis-casos', LoginController.isAuthenticated,casosController.getMisCasos);
   // Asegúrate de que el usuario esté autenticado antes de acceder al chat
-router.get('/chat', LoginController.isAuthenticated, (req, res) => {
-  res.render('chat', { user: req.user });
+  router.get('/chat/:id', LoginController.isAuthenticated, async (req, res) => {
+    try {
+      const caso = await Caso.findById(req.params.id);
+      if (!caso) {
+        // Maneja el caso en el que no se encuentra el caso
+        return res.status(404).send('Caso no encontrado');
+      }
+      res.render('chat', { user: req.user, caso });
+    } catch (error) {
+      // Maneja cualquier otro error que pueda ocurrir
+      console.error(error);
+      res.status(500).send('Error al buscar el caso');
+    }
+  });
+  
+//validacion en tiempo real:
+router.get('/checkUsername', async (req, res) => {
+  const username = req.query.username;
+  const user = await User.findOne({ username: username });
+  if (user) {
+    res.send({ valid: false });
+  } else {
+    res.send({ valid: true });
+  }
 });
-//router.post('/chat', ChatController.chat);
-//router.post('/citas', citasController.postCita);
-//router.get('/citas', LoginController.isAuthenticated,citasController.getCitas);
-//router.get('/citasJSON', citasController.getCitasJSON);
+
+router.get('/checkEmail', async (req, res) => {
+  const email = req.query.email;
+  const user = await User.findOne({ email: email });
+  if (user) {
+    res.send({ valid: false });
+  } else {
+    res.send({ valid: true });
+  }
+});
+router.get('/checkphone', async (req, res) => {
+  const phone = req.query.phone;
+  const user = await User.findOne({ phone: phone });
+  if (user) {
+    res.send({ valid: false });
+  } else {
+    res.send({ valid: true });
+  }
+});
+router.get('/checkci', async (req, res) => {
+  const ci = req.query.ci;
+  const user = await User.findOne({ ci: ci });
+  if (user) {
+    res.send({ valid: false });
+  } else {
+    res.send({ valid: true });
+  }
+});
+//perte de casos
+router.get('/casos/:id', LoginController.isAuthenticated,casosController.getCaso);
+router.get('/get-documento-url/:documentoId', LoginController.isAuthenticated, casosController.getDocumentoUrl);
+router.post('/chat/:id', LoginController.isAuthenticated, ChatController.chat);
+router.get('/citas', LoginController.isAuthenticated,citasController.getCitas);
+router.get('/citasJSON', citasController.getCitasJSON);
+//editar un usuario
+router.post('/profile/edit', LoginController.isAuthenticated, upload.single('editimage'), SignupController.postEditUser);
+//solicitar abogado de remplazo
+router.post('/solicitud-abogado-reemplazo', LoginController.isAuthenticated, BufeteUserController.postSolicitudAbogadoReemplazo);
 
 module.exports = router;

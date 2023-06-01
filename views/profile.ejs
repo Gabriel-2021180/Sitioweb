@@ -1,139 +1,131 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/css/profile-style.css" />
+<!DOCTYPE html>
+<html lang="es">
+
+<link rel="stylesheet" href="/css/main.css" />
+		<link rel="stylesheet" href="/sass/main.scss">
+    <link rel="stylesheet" href="/css/profile-style.css">
+		<noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<%-include('../views/layouts/layoutP.ejs')%>
-<div class="container emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="<%= user.image%>" alt=""/>
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-                                     Username: <%= user.username %>
-                                    </h5>
-                                    
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="/profile" role="tab" aria-controls="home" aria-selected="true">Sobre mi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="/profile" role="tab" aria-controls="profile" aria-selected="false">Mis Casos</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-btn" name="btnAddMore" value="Editar perfil"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                          <strong><p>Fecha de Nacimiento</p></strong>
-                            <p><%= user.fechanac.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nombre Completo</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><%= user.nombres %> <%= user.apellidos %></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><%= user.email %></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Telefono</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><%= user.phone %></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Direccion</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><%= user.direccion %></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-md-6">
-                                              <label>CI</label>
-                                          </div>
-                                          <div class="col-md-6">
-                                              <p><%= user.ci %></p>
-                                          </div>
-                                      </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experience</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>10$/hr</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Total Projects</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>230</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>English Level</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>6 months</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>           
+<body class="is-preload landing">
+  <style>
+    .image-upload-container {
+      margin-bottom: 20px;
+    }
+  
+    
+  
+    .image-upload-input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+    <div id="page-wrapper">
+      <%-include('../views/layouts/layoutP.ejs')%>
+  <section id="banner">
+  <div class="content">
+  
+    <div class="perfil-container">
+      <img src="<%= user.image %>" alt="Perfil de <%= user.username %>" class="image left">
+      
+      <div class="info">
+        <form id="editForm" action="/profile/edit" method="post" enctype="multipart/form-data" style="display: none;">
+          <div>
+            <label for="editfechanac">Fecha de Nacimiento:</label>
+            <input type="date" id="fechanac" name="editfechanac" value="<%= user.fechanac.toISOString().split('T')[0] %>" style="color: black;">
+          </div>
+          <div>
+            <label for="editnombres">Nombre:</label>
+            <input type="text" id="nombres" name="editnombres" value="<%= user.nombres %>">
+          </div>
+          <div>
+            <label for="editapellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="editapellidos" value="<%= user.apellidos %>">
+          </div>
+          <div>
+            <label for="editusername">Username:</label>
+            <input type="text" id="username" name="editusername" value="<%= user.username %>">
+          </div>
+          
+          <div>
+            <label for="editphone">Teléfono:</label>
+            <input type="text" id="edithone" name="editphone" value="<%= user.phone %>">
+          </div>
+          <div>
+            <label for="editdireccion">Dirección:</label>
+            <input type="text" id="direccion" name="editdireccion" value="<%= user.direccion %>">
+          </div>
+          <div>
+            <label for="editci">CI:</label>
+            <input type="text" id="ci" name="editci" value="<%= user.ci %>">
+          </div>
+          <!-- Agrega aquí el resto de los campos -->
+          <div class="image-upload-container">
+            <label for="editimage" class="image-upload-label">Nueva imagen de perfil:</label>
+            <input type="file" id="editimage" name="editimage" accept=".jpg,.jpeg,.png" class="image-upload-input" value="<%= user.image %>">
+          </div>
+          <button class="button primary" type="submit">Guardar cambios</button>
+        </form>
+
+        <div id="userInfo">
+        <div>
+          <label>Username:</label>
+          <p><%= user.username %></p>
         </div>
+        <div>
+          <label>Fecha de Nacimiento:</label>
+          <p><%= user.fechanac.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+        </div>
+        <div>
+          <label>Nombre Completo:</label>
+          <p><%= user.nombres %> <%= user.apellidos %></p>
+        </div>
+        <div>
+          <label>Email:</label>
+          <p><%= user.email %></p>
+        </div>
+        <div>
+          <label>Teléfono:</label>
+          <p><%= user.phone %></p>
+        </div>
+        <div>
+          <label>Dirección:</label>
+          <p><%= user.direccion %></p>
+        </div>
+        <div>
+          <label>CI:</label>
+          <p><%= user.ci %></p>
+        </div>
+      </div>
+    </div>
+      <div>
+        <button id="editButton" class="button primary">Editar</button>
+      </div>
+      </div>
+      </section>
+      </div>
+    </body>
+        
+<script src="/javascript/jquery.min.js"></script>
+<script src="/javascript/jquery.scrolly.min.js"></script>
+<script src="/javascript/jquery.dropotron.min.js"></script>
+<script src="/javascript/jquery.scrollex.min.js"></script>
+<script src="/javascript/browser.min.js"></script>
+<script src="/javascript/breakpoints.min.js"></script>
+<script src="/javascript/util.js"></script>
+<script src="/javascript/main.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#editButton').click(function() {
+      $('#userInfo').hide();
+      $('#editForm').show();
+    });
+  });
+</script>
+</html>

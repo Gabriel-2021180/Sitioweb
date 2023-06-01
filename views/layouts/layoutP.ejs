@@ -12,38 +12,29 @@
 
     <!-- Header -->
       <header id="header">
-        <h1 id="logo"><a href="/index">Azurduy & Asociados</a></h1>
+        <h1 id="logo">
+          <a href="/index">
+            <img src="https://storage.googleapis.com/primerstorage/LogoA-removebg-preview.png" alt="Azurduy & Asociados" style="max-width: 100%; height: 50px;">
+          </a>
+        </h1>
+        
         <nav id="nav">
           <ul>
             <li><a href="/index">Inicio</a></li>
-            <li><a href="/index">Servicios</a></li>
+            <li><a href="/abogados">Nuestro Equipo</a></li>
+             <!-- <li><a href="/index">Servicios</a></li>
             <li><a href="/index">Sobre Nosotros</a></li>
-            <li><a href="/citas">agenda tu cita</a></li>
-            <li><a href="/index">Contáctenos</a></li>
-            <!--<li>
-              <a href="#">Layouts</a>
-              <ul>
-                <li><a href="left-sidebar.html">Left Sidebar</a></li>
-                <li><a href="right-sidebar.html">Right Sidebar</a></li>
-                <li><a href="no-sidebar.html">No Sidebar</a></li>
-                <li>
-                  <a href="#">Submenu</a>
-                  <ul>
-                    <li><a href="#">Option 1</a></li>
-                    <li><a href="#">Option 2</a></li>
-                    <li><a href="#">Option 3</a></li>
-                    <li><a href="#">Option 4</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="elements.html">Elements</a></li>-->
+            
+            <li><a href="/index">Contáctenos</a></li> <!-->
+            
             <% if (!user) { %>
               <li><a href="/signup" class="button fit">Regístrate</a></li>
               <li><a href="/" class="button primary">Iniciar Sesión</a></li>
               <% } else { %>
+                <li><a href="/mis-casos">Mis Casos</a></li>  
+              <li><a href="/citas">Mis Citas</a></li>
               <li><a href="/profile" class="button primary">Perfil</a></li>
-              <li><a href="/" class="button fit">Cerrar Sesión</a></li>
+              <li><a href="/logout" class="button fit">Cerrar Sesión</a></li>
               <% } %>
             
           </ul>

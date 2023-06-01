@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/sass/main.scss">
+  <noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
+  <title>Miembros del Bufete</title>
+  <style>
+    #miembros-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+  
+    .miembro {
+      width: 300px;
+      
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgba(228, 227, 227, 0.062);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 5px;
+    }
+  
+    .miembro img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+      
+    }
+    .miembro:hover {
+    transform: translateY(-5px);
+  }
+    .info {
+      margin-bottom: 10px;
+    }
+  
+    .nombre {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+  
+    .descripcion {
+      margin-bottom: 10px;
+    }
+  
+    .btn-conocelo {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #942833;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  
+    @media (max-width: 600px) {
+      .miembro {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="is-preload landing">
+  <div id="page-wrapper">
+    
+    <%-include('../views/layouts/layout-index.ejs')%>
+  <section id="banner">
+    
+    <div class="content">
+      <header>
+        <h2>Nuestro Equipo</h2>
+       
+      </header>
+      <div id="miembros-container">
+        <% abogados.forEach(abogado => { %>
+          <div class="miembro">
+            <img src="<%= abogado.image %>" alt="Imagen de <%= abogado.nombres %> <%= abogado.apellidos %>">
+            <div class="info">
+              <div class="nombre"><%= abogado.nombres %> <%= abogado.apellidos %></div>
+              <div class="descripcion"><%= abogado.descripcion %></div>
+              <a class="button fit" href="/perfil/<%= abogado._id %>">Ver Perfil</a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+    
+  </section>
+  
+</div>
+</body>
+<!-- Scripts -->
+<script src="/javascript/jquery.min.js"></script>
+<script src="/javascript/jquery.scrolly.min.js"></script>
+<script src="/javascript/jquery.dropotron.min.js"></script>
+<script src="/javascript/jquery.scrollex.min.js"></script>
+<script src="/javascript/browser.min.js"></script>
+<script src="/javascript/breakpoints.min.js"></script>
+<script src="/javascript/util.js"></script>
+<script src="/javascript/main.js"></script>
+</html>

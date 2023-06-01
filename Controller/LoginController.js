@@ -2,7 +2,7 @@ const User = require('../Model/user'); // Asegúrate de que la ruta sea correcta
 const { validationResult } = require('express-validator');
 const passport = require('passport');
 const { RateLimiterMemory } = require('rate-limiter-flexible');
-
+const Notification=require('../Model/notificaciones')
 // LoginController.js
 
 
@@ -28,9 +28,12 @@ exports.postLogin = async (req, res, next) => {
             return res.redirect('/');
         }
 
+        // Comprueba si el usuario tiene alguna notificación pendiente
+        const notification = await Notification.findOne({ user: user._id, read: false });
+
         // Autenticar al usuario
         passport.authenticate('local', {
-            successRedirect: '/index',
+            successRedirect: notification ? '/abogados' : '/index',
             failureRedirect: '/',
             failureFlash: true,
         })(req, res, next);
@@ -47,14 +50,7 @@ exports.getIndex = (req, res) => {
     res.render('index');
 };
 
-exports.getLogout = (req, res) => {
-    req.logout(function (err) {
-        if (err) {
-            console.error(err);
-        }
-        res.redirect('/'); // Redirige al usuario a la página de inicio
-    });
-  };
+
   
 
 /*exports.getIndex = (req, res) => {
@@ -68,3 +64,7 @@ exports.isAuthenticated = (req, res, next) => {
     res.redirect('/');
 };
   
+exports.getLogout = (req, res) => {
+    req.session.destroy(); // Destruye la sesión del usuario
+    res.redirect('/index');
+  };

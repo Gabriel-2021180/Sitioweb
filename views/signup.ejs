@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/signup-style.css">
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>Registro</title>
     <script>
       window.addEventListener("DOMContentLoaded", () => {
@@ -117,11 +118,11 @@
     </script>
 </head>
 
-<body>
-
+<body data-error-msg="<%= error_msg %>">
+<script src="/javascript/validacion"></script>
     <div class="container">
         <form class="form" action="/signup" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
-          <h2>Registro de usuario</h2>
+          <h2 style="color: rgb(0, 0, 0);">Formulario de Registro</h2>
           <div class="form-group">
             <label for="nombres">Nombres:</label>
             <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresa tus nombres" maxlength="30" required>
@@ -131,7 +132,7 @@
             <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingresa tus apellidos" maxlength="30" required>
           </div>
           <div class="form-group">
-            <label for="username">Nombre de Cliente(Es el nombre con el que aparecerá):</label>
+            <label for="username">Nombre de Usuario:</label>
             <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu nombre de usuario" maxlength="30" required>
             <% if (locals.error_msg && locals.username) { %>
               <small class="error-message"><%= error_msg %></small>
@@ -160,7 +161,7 @@
             <% } %>
           </div>
           <div class="form-group">
-            <label for="email">Email:</label>
+            <label for="email">Email(solo gmail):</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico" maxlength="50" required>
             <% if (locals.error_msg && locals.email) { %>
               <small class="error-message"><%= error_msg %></small>
@@ -189,11 +190,64 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary">Registrarse</button>
+          <button type="submit" class="choose-file">Registrarse</button>
         </form>
-        <a href="#" class="float">
-          <i class="fa fa-plus my-float"></i>
-          </a>
+        <a href="/login" class="float">
+          <i class="fas fa-arrow-left"></i> Atrás
+        </a>
+        
       </div>
+      <script>
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const ciInput = document.getElementById('ci');
+
+        usernameInput.addEventListener('input', () => {
+          const username = usernameInput.value;
+          fetch(`/checkUsername?username=${username}`)
+            .then(response => response.json())
+            .then(data => {
+              if (!data.valid) {
+                alert('el nombre de usuario ya esta en uso')
+              }
+            });
+        });
+
+          emailInput.addEventListener('input', () => {
+            const email = emailInput.value;
+            fetch(`/checkEmail?email=${email}`)
+              .then(response => response.json())
+              .then(data => {
+                if (!data.valid) {
+                  alert('el email ya esta en uso')
+                }
+              });
+          });
+
+          phoneInput.addEventListener('input', () => {
+            const phone = phoneInput.value;
+            fetch(`/checkphone?phone=${phone}`)
+              .then(response => response.json())
+              .then(data => {
+                if (!data.valid) {
+                  alert('el numero de telefono ya fue registrado')
+                }
+              });
+          });
+          
+          ciInput.addEventListener('input', () => {
+            const ci = ciInput.value;
+            fetch(`/checkci?ci=${ci}`)
+              .then(response => response.json())
+              .then(data => {
+                if (!data.valid) {
+                  alert('el numero de carnet ya esta registrado')
+                }
+              });
+          });
+          
+      </script>
+      
 </body>
 </html>

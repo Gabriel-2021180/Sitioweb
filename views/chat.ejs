@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/sass/main.scss">
+  <noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
   <title>Chat</title>
   <style>
     #messages {
@@ -15,12 +18,105 @@
   </style>
 </head>
 <body>
-  <h1>Chat</h1>
-  <div id="messages"></div>
-  <form id="chat-form">
-    <input type="text" id="message-input" placeholder="Escribe tu mensaje...">
-    <button type="submit">Enviar</button>
-  </form>
+  <body class="is-preload landing">
+    <div id="page-wrapper">
+      
+      <%-include('../views/layouts/layout-index.ejs')%>
+    <section >
+      
+      <div class="content">
+        <style>
+          body{
+            overflow: auto;
+          }
+          .chat-container {
+            max-width: 800px;
+            margin: 70px auto;
+            padding: 20px;
+            background-color: #f8f8f80a;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+          }
+        
+          .chat-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+          }
+        
+          .chat-messages {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #ffffff15;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
+        
+          .chat-message {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+          }
+        
+          .chat-message .sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+          }
+        
+          .chat-message .text {
+            margin-bottom: 5px;
+            color: #555;
+          }
+        
+          .chat-form {
+            margin-top: 20px;
+          }
+        
+          .chat-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+          }
+        
+          .chat-form button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #942833;
+            color: #fff;
+            cursor: pointer;
+          }
+        
+          @media (max-width: 600px) {
+            .chat-container {
+              max-width: 100%;
+              border-radius: 0;
+            }
+        
+            .chat-messages {
+              max-height: 300px;
+            }
+          }
+        </style>
+        
+        <div class="chat-container">
+          <h1>Legal-IA</h1>
+          <div id="messages" class="chat-messages"></div>
+          <form id="chat-form" class="chat-form">
+            <input type="text" id="message-input" placeholder="Escribe tu mensaje...">
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+        
+        
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function() {
@@ -36,14 +132,14 @@
           $messageInput.val("");
 
           $.ajax({
-            url: "/chat",
+            url: "/chat/<%= caso._id %>", // Actualiza la URL para incluir el ID del caso
             type: "POST",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify({ message }),
             success: function(response) {
               const chatbotMessage = response.message;
-              $messages.append(`<div class="message">Chatbot: ${chatbotMessage}</div>`);
+              $messages.append(`<div class="message">Legal-IA: ${chatbotMessage}</div>`);
             },
             error: function() {
               $messages.append(`<div class="message">Error al obtener respuesta del chatbot.</div>`);
@@ -53,5 +149,18 @@
       });
     });
   </script>
+  </div>
+ </section>
+  
+</div>
 </body>
+<!-- Scripts -->
+<script src="/javascript/jquery.min.js"></script>
+<script src="/javascript/jquery.scrolly.min.js"></script>
+<script src="/javascript/jquery.dropotron.min.js"></script>
+<script src="/javascript/jquery.scrollex.min.js"></script>
+<script src="/javascript/browser.min.js"></script>
+<script src="/javascript/breakpoints.min.js"></script>
+<script src="/javascript/util.js"></script>
+<script src="/javascript/main.js"></script>
 </html>

@@ -19,6 +19,7 @@ const userSchema = new Schema({
   emailVerificationToken: String,
   //rol o el nombre que le vayan a poner: Int o bool no se cuántos tipos van a haber
   emailVerified: { type: Boolean, default: false },
+  seekingReplacementLawyer: { type: Boolean, default: false }
 });
 
 userSchema.methods.encryptPassword = async (password) => {

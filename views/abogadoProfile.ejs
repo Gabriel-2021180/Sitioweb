@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/sass/main.scss">
+  <noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
+  <title>Perfil del Abogado</title>
+  <style>
+    
+    .perfil-abogado {
+      border-radius: 5px;
+      text-align: center;
+      display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgba(228, 227, 227, 0.062);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 5px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .perfil-abogado img {
+      width: 100px;
+      height: 120px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .perfil-abogado .info {
+      flex: 1;
+    }
+
+    .perfil-abogado .nombre {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .perfil-abogado .descripcion {
+      font-size: 16px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body style="overflow: hidden;" class="is-preload landing">
+  <div id="page-wrapper">
+    <%-include('../views/layouts/layoutP.ejs')%>
+   
+   
+    <section id="banner">
+      
+      <div class="content">
+        <div class="perfil-abogado">
+          <img class="image left" src="<%= abogado.image %>" alt="Imagen de <%= abogado.nombres %> <%= abogado.apellidos %>">
+          <div class="info">
+            <div class="nombre"><%= abogado.nombres %> <%= abogado.apellidos %></div>
+            <div class="descripcion"><%= abogado.descripcion %></div>
+            <div class="otra-informacion">
+              <p>Correo electrónico: <%= abogado.email %></p>
+              <p>Teléfono: <%= abogado.phone %></p>
+              <p>Dirección: <%= abogado.direccion %></p>
+              <% if (usuarioAutenticado) { %>
+                  <form action="/solicitar" method="POST">
+                    <h4>Realizame una consulta</h4>
+                    <input type="hidden" name="abogadoId" value="<%= abogado._id %>">
+                    <textarea name="mensaje" placeholder="Escribe tu mensaje"></textarea>
+                    <select name="tipo" required>
+                      <option value="">Selecciona el tipo de caso</option>
+                      <option value="penal">Penal</option>
+                      <option value="civil">Civil</option>
+                      <option value="laboral">Laboral</option>
+                      <option value="constitucional">Constitucional</option>
+                      <option value="administrativo">Administrativo</option>
+                      <option value="comercial">Comercial</option>
+                      <option value="no estoy seguro">no estoy seguro</option>
+                    </select>
+                    <button type="submit" class="button primary fit">Enviar mensaje</button>
+                  </form>
+                <% } %>
+            </div>
+            <% if (seekingReplacementLawyer) { %>
+              <button type="button" class="button primary" onclick="solicitarAbogadoReemplazo('<%= abogado.id %>')">Solicitar como reemplazo</button>
+            <% } %>
+          </div>
+          
+        </div>
+       
+        </div>
+        </section>
+        </div>
+ 
+</body>
+<!-- Scripts -->
+<script src="/javascript/jquery.min.js"></script>
+<script src="/javascript/jquery.scrolly.min.js"></script>
+<script src="/javascript/jquery.dropotron.min.js"></script>
+<script src="/javascript/jquery.scrollex.min.js"></script>
+<script src="/javascript/browser.min.js"></script>
+<script src="/javascript/breakpoints.min.js"></script>
+<script src="/javascript/util.js"></script>
+<script src="/javascript/main.js"></script>
+<script>
+  function solicitarAbogadoReemplazo(abogadoId) {
+    // Aquí puedes obtener los datos del caso del usuario
+    const mensaje = 'Necesito un abogado de reemplazo para mi caso de ' + '<%= tipoDeCaso %>';
+    const tipo = '<%= tipoDeCaso %>';
+
+    $.post('/solicitud-abogado-reemplazo', { abogadoId, mensaje, tipo }, function(response) {
+      // Muestra un mensaje de éxito y recarga la página
+      Swal.fire({
+        title: 'Éxito',
+        text: 'Solicitud de abogado de reemplazo enviada',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+      }).then(() => {
+        location.reload();
+      });
+    }).fail(function(error) {
+      // Muestra un mensaje de error
+      Swal.fire({
+        title: 'Error',
+        text: 'Ocurrió un error al enviar la solicitud de abogado de reemplazo',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
+    });
+  }
+</script>
+
+</html>

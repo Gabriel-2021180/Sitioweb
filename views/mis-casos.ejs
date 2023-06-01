@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+		
+    <link rel="stylesheet" href="/css/main.css" />
+		<link rel="stylesheet" href="/sass/main.scss">
+
+		<noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
+
+    <body  class="is-preload">
+      <div id="page-wrapper">
+        <%- include('../views/layouts/layout-index.ejs') %>
+
+
+
+        <style>
+          .container {
+            padding: 20px;
+            background-color: #ffffff21;
+            border-radius: 5px;
+            margin: 0 auto;
+            max-width: 600px;
+          }
+        
+          .container h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+          }
+        
+          .container p {
+            margin-bottom: 10px;
+          }
+        
+          .container strong {
+            font-weight: bold;
+          }
+        
+          .container ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+          }
+        
+          .container li {
+            margin-bottom: 20px;
+          }
+        
+          .container h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+          }
+        
+          .container a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #942833;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+          }
+        
+          .container .separator {
+            height: 1px;
+            background-color: #ccc;
+            margin-top: 10px;
+            margin-bottom: 20px;
+          }
+        
+          @media (max-width: 480px) {
+            .container {
+              max-width: 100%;
+              padding: 10px;
+            }
+        
+            .container h1 {
+              font-size: 20px;
+            }
+        
+            .container p,
+            .container strong {
+              font-size: 14px;
+            }
+        
+            .container h3 {
+              font-size: 18px;
+            }
+        
+            .container a {
+              font-size: 14px;
+            }
+          }
+        </style>
+        <section >
+          <div class="content">
+            <div class="container">
+              <header>
+                <h1>Mis Casos</h1>
+              </header>
+              <% if (casos.length === 0) { %>
+                <p>No tienes casos registrados.</p>
+              <% } else { %>
+                <ul>
+                  <% casos.forEach(caso => { %>
+                    <li>
+                      <div class="separator"></div>
+                      <h3><%= caso.nombrecaso %></h3>
+                      <p><strong>Descripción:</strong> <%= caso.descripcion %></p>
+                      <p><strong>Abogado:</strong> <%= caso.abogado.nombres %> <%= caso.abogado.apellidos %></p>
+                      <p><strong>Fecha de inicio:</strong> <%= caso.fechaini.toDateString() %></p>
+                      <% if (caso.fechafin) { %>
+                        <p><strong>Fecha de fin:</strong> <%= caso.fechafin.toDateString() %></p>
+                      <% } %>
+                      <a href="/casos/<%= caso._id %>" class="btn btn-primary">Ver Detalle</a>
+                      <div class="separator"></div>
+                    </li>
+                  <% }) %>
+                </ul>
+              <% } %>
+            </div>
+          </div>
+        </section>
+<!-- Scripts -->
+<script src="/javascript/jquery.min.js"></script>
+<script src="/javascript/jquery.scrolly.min.js"></script>
+<script src="/javascript/jquery.dropotron.min.js"></script>
+<script src="/javascript/jquery.scrollex.min.js"></script>
+<script src="/javascript/browser.min.js"></script>
+<script src="/javascript/breakpoints.min.js"></script>
+<script src="/javascript/util.js"></script>
+<script src="/javascript/main.js"></script>

@@ -5,7 +5,7 @@ const { RateLimiterMemory } = require('rate-limiter-flexible');
 const { Storage } = require('@google-cloud/storage')
 const storage = new Storage({ keyFilename: "googleimage.json" })
 const { check } = require('express-validator');
-const moment = require('moment');
+  const moment = require('moment');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const emailValidator = require('email-validator');
@@ -23,6 +23,34 @@ exports.postSignup = async (req, res) => {
     const { nombres, apellidos, username, ci, direccion, fechanac, phone, email, password } = req.body;
     
   
+  const existingUser = await User.findOne({ $or: [{ username: username }, { ci: ci }, { phone: phone }, { email: email }] });
+
+  if (existingUser) {
+    let errorMessage;
+
+    if (existingUser.username === username) {
+      errorMessage = 'El nombre de usuario ya está en uso.';
+    } else if (existingUser.ci === ci) {
+      errorMessage = 'La cédula de identidad ya está registrada.';
+    } else if (existingUser.phone === phone) {
+      errorMessage = 'El número de celular ya está registrado.';
+    } else if (existingUser.email === email) {
+      errorMessage = 'El correo electrónico ya está registrado.';
+    }
+
+    req.flash('error_msg', errorMessage);
+    res.locals.error_msg = req.flash('error_msg');
+    return res.render('signup', {
+      nombres: nombres,
+      apellidos: apellidos,
+      username: username,
+      ci: ci,
+      direccion: direccion,
+      fechanac: fechanac,
+      phone: phone,
+      email: email,
+    });
+  }
     // Validación manual
     let errors = [];
   
@@ -200,3 +228,42 @@ async function uploadFile(file) {
         stream.end(file.buffer);
     });
 }
+//editar usuario:
+exports.postEditUser = async (req, res) => {
+  const userId = req.user._id;
+  const { editnombres, editapellidos, editusername, editci, editdireccion, editfechanac, editphone } = req.body;
+
+  // Aquí puedes agregar validaciones para los campos de entrada
+console.log(userId)
+  const user = await User.findById(userId);
+  if (!user) {
+    req.flash('error_msg', 'Usuario no encontrado.');
+    
+    return res.redirect('/profile');
+  }
+
+  user.nombres = editnombres;
+  user.apellidos = editapellidos;
+  user.username = editusername;
+  user.ci = editci;
+  user.direccion = editdireccion;
+  user.fechanac = editfechanac;
+  user.phone = editphone;
+  
+
+  if (req.file) {
+    const url = await uploadFile(req.file);
+    user.image = url;
+  }
+
+  try {
+    await user.save();
+    req.flash('success_msg', 'Usuario actualizado correctamente.');
+  } catch (error) {
+   
+
+    req.flash('error_msg', 'Ocurrió un error al actualizar el usuario.');
+  }
+
+  res.redirect('/profile');
+};
