@@ -16,7 +16,7 @@ exports.postLogin = async (req, res, next) => {
     const { username } = req.body;
 
     try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ username, estado:true });
 
         if (!user) {
             req.flash('error_msg', 'Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');

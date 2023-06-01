@@ -14,6 +14,7 @@ const userSchema = new Schema({
   fechanac: Date,
   phone: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
+  estado:{type:Boolean, default: true},
   password: String,
   image: String,
   emailVerificationToken: String,

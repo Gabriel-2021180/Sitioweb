@@ -9,9 +9,38 @@
 		<noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload landing">
+		
 		<div id="page-wrapper">
 			<%-include('../views/layouts/layout-index.ejs')%>
 			
+			<style>
+				.float {
+    position: fixed;
+	z-index: 9999;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 40px;
+    background-color:#fdfdfd00;
+    color: rgb(255, 255, 255);
+    border-radius: 50px;
+    text-align: center;
+  
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+  
+    
+    .float:hover {
+      color: rgb(255, 255, 255); /* Cambia el color cuando se pasa el mouse sobre el enlace */
+      text-decoration: none;  
+  }
+			</style>
+			<a href="/index#banner" class="float">
+				Inicio
+				<img src="https://storage.googleapis.com/primerstorage/LogoA-removebg-preview.png" alt="Azurduy & Asociados" style="max-width: 100%; height: 50px;">
+				
+			  </a>
 			<!-- Banner -->
 				<section id="banner">
 					<div class="content">
@@ -120,7 +149,7 @@
 							<h2>Regístrate ahora para obtener asesoramiento legal personalizado y exclusivo.</h2>
 							
 						</header>
-						<a href="#" class="button primary large">Regístrate</a>
+						<a href="/signup" class="button primary large">Regístrate</a>
 					</div>
 				</section>
 
