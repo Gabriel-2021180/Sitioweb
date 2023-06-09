@@ -42,29 +42,37 @@ exports.getPerfilAbogado = async (req, res) => {
 };
 
 
-  exports.postSolicitudAbogado = async (req, res) => {
-    try {
-      const { abogadoId, mensaje,tipo } = req.body;
-      const clienteId = req.user._id;
-  
-      const solicitud = new SolicitudAbogado({
-        abogado: abogadoId,
-        cliente: clienteId,
-        mensaje,
-        tipo,
-        estado: 'pendiente',
-        tipoSolicitud:'nuevo',
-      });
-  
-      await solicitud.save();
-  
-      res.redirect(`/abogados`);
-    } catch (error) {
-      console.error('Error al enviar la solicitud de abogado:', error);
-      req.flash('error_msg', 'Ocurrió un error al enviar la solicitud de abogado. Por favor, inténtalo de nuevo.');
-      res.redirect('/abogados');
+exports.postSolicitudAbogado = async (req, res) => {
+  try {
+    const { abogadoId, mensaje,tipo } = req.body;
+    const clienteId = req.user._id;
+
+    // Verifica si ya existe una solicitud de este cliente a este abogado
+    const solicitudExistente = await SolicitudAbogado.findOne({ abogado: abogadoId, cliente: clienteId });
+    if (solicitudExistente) {
+      req.flash('error_msg', 'Ya has enviado una solicitud a este abogado. Por favor, espera su respuesta.');
+      return res.redirect('/abogados');
     }
-  };
+
+    const solicitud = new SolicitudAbogado({
+      abogado: abogadoId,
+      cliente: clienteId,
+      mensaje,
+      tipo,
+      estado: 'pendiente',
+      tipoSolicitud:'nuevo',
+    });
+
+    await solicitud.save();
+
+    res.redirect(`/abogados`);
+  } catch (error) {
+    console.error('Error al enviar la solicitud de abogado:', error);
+    req.flash('error_msg', 'Ocurrió un error al enviar la solicitud de abogado. Por favor, inténtalo de nuevo.');
+    res.redirect('/abogados');
+  }
+};
+
   exports.postSolicitudAbogadoReemplazo = async (req, res) => {
     try {
       const { abogadoId, mensaje, tipo } = req.body;

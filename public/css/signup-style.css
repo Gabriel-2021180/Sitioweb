@@ -18,11 +18,12 @@ body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-image: url("https://storage.googleapis.com/primerstorage/logorene.png");
+	/*background-image: url("https://storage.googleapis.com/primerstorage/logorene.png");*/
+  background-color: #1d1e20;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	filter: blur(10px);
+	
 	z-index: -1;
   }
   
@@ -79,7 +80,7 @@ body {
 
 .container:after {
 	
-  background: rgba(255, 255, 255, 0.6);
+  background: #8f96a3;
   content: '';
   display: block;
   height: 100%;
@@ -97,6 +98,7 @@ form button.submit {
   padding: 0.5em 0.5em;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
+  text-align: center;
 }
 
 form button:hover,
@@ -304,7 +306,7 @@ html {
 
 .choose-file {
   padding: 8px 20px;
-  background-color: #942833;
+  background-color: #2277AF;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -371,7 +373,7 @@ html {
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: #942833;
+  background-color: #2277AF;
   color: white;
   border-radius: 50px;
   text-align: center;

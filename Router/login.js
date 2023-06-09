@@ -38,7 +38,7 @@ const bufeteUser = require('../Model/bufeteUser');
       user.emailVerificationToken = undefined;
       await user.save();
       req.flash('success_msg', 'Correo electrónico verificado exitosamente. Ahora puedes iniciar sesión.');
-      res.redirect('/');
+      res.redirect('/login');
     } catch (error) {
       console.error('Error al verificar el correo electrónico:', error);
       req.flash('error_msg', 'Ocurrió un error al verificar tu correo electrónico. Por favor, inténtalo de nuevo.');

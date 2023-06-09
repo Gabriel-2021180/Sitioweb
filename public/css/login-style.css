@@ -157,7 +157,7 @@ button:hover {
 
 .alert-danger {
     background-color: #f8d7da;
-    color: #721c24;
+    color: #2277AF;
     border-color: #f5c6cb;
 }
 
@@ -175,7 +175,7 @@ a {
     text-decoration: none;
     font-weight: bold;
     color: #fff;
-    background-color: #690c0c;
+    background-color: #2277AF;
     transition: background-color 0.3s ease;
   }
   

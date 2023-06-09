@@ -9,7 +9,7 @@ const configuration = new Configuration({
 const chat = async (req, res) => {
   const userMessage = req.body.message;
   const user = req.user;
-  const casoId = req.params.id; // Obtén el ID del caso de la URL
+  const casoId = req.params.id;
 
   if (!user) {
     console.error("Error: el objeto user no está definido");
@@ -17,7 +17,6 @@ const chat = async (req, res) => {
   }
 
   try {
-    // Busca el caso específico asociado al usuario
     const caso = await Caso.findOne({ _id: casoId, cliente: user._id });
 
     if (!caso) {
@@ -25,10 +24,13 @@ const chat = async (req, res) => {
       return res.status(404).json({ message: "Caso no encontrado." });
     }
 
-    // Crea el contexto con la información del usuario y el caso
-    let context = `Usuario: ${user.username}\nNombre: ${user.nombres} ${user.apellidos}\nCorreo: ${user.email}\n`;
-    context += `el nombre de mi Caso es: ${caso.nombrecaso}\n esta es la Descripcion de mi Caso: ${caso.descripcion}\nahora cuando te pregunte acerca del avance o te pida consejos te basras en esto Observaciones: ${caso.observaciones.join(', ')}\n`;
-    context += `Mensaje: ${userMessage}`;
+    let context = `Soy un abogado asistente de inteligencia artificial y estoy aquí para ayudar con el caso de ${user.nombres} ${user.apellidos}.\n`;
+    context += `El caso se llama "${caso.nombrecaso}" y aquí está su descripción: ${caso.descripcion}\n`;
+    context += `Hasta ahora, estas son las observaciones que se han hecho sobre el caso:\n`;
+    for (let i = 0; i < caso.observaciones.length; i++) {
+      context += `- Observación ${i+1}: ${caso.observaciones[i]}\n`;
+    }
+    context += `Ahora, ${user.nombres} me ha hecho la siguiente pregunta: ${userMessage}\n`;
 
     const openai = new OpenAIApi(configuration);
     const response = await openai.createCompletion({
@@ -47,6 +49,7 @@ const chat = async (req, res) => {
     res.status(500).json({ message: "Error al generar la respuesta." });
   }
 };
+
 
 
 module.exports = { chat };

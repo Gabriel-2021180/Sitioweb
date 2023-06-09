@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const User = require('../Model/user'); // Asegúrate de cambiar esta ruta al archivo del modelo de usuario correcto
+const User = require('../Model/user');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -21,6 +21,7 @@ router.post('/', async (request, response, next) => {
       if (isMatch) {
         // Crear un objeto de usuario para enviar como respuesta
         let userResponse = {
+          _id:user._id,
           nombres: user.nombres,
           apellidos: user.apellidos,
           username: user.username,

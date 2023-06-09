@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #080710;
+  background-color: #1d1e20;
   overflow: hidden;
 }
 
@@ -29,7 +29,7 @@ body {
 }
 
 .shape:last-child {
-  background: linear-gradient(to right, #942833, #942833);
+  background: linear-gradient(to right, #2277AF, #2277AF);
   right: -30px;
   bottom: -80px;
 }
@@ -177,22 +177,21 @@ button {
   margin-right: 4px;
 }
 .float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 40px;
-    right: 40px;
-    background-color:#942833;
-    color: white;
-    border-radius: 50px;
-    text-align: center;
+  position: fixed;
+  width: 100px;
+  height: 50px;
+  top: 10px;
+  right: 5px;
+  text-align: right;
+  font-size: smaller;
+  color: white;
+  border-radius: 50px;
   
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-  }
-  
-    
-    .float:hover {
-      color: rgb(255, 255, 255); /* Cambia el color cuando se pasa el mouse sobre el enlace */
-      text-decoration: none;  
-  }
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.float:hover {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}

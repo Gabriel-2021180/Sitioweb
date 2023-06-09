@@ -111,12 +111,12 @@ input, select, textarea {
 		-ms-transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		border-bottom: dotted 1px;
-		color: #8a0004;
+		color: #2277AF;
 		text-decoration: none;
 	}
 
 		a:hover {
-			color: #8a0004 !important;
+			color: #2277AF !important;
 			border-bottom-color: transparent;
 		}
 
@@ -2186,7 +2186,7 @@ input, select, textarea {
 	}
 
 		header.major:after {
-			background: #942833;
+			background: #2277AF;
 			content: '';
 			display: inline-block;
 			height: 0.2em;
@@ -2255,7 +2255,7 @@ input, select, textarea {
 		input[type="email"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #942833;
+			border-color: #2277AF;
 		}
 
 	select {
@@ -2358,7 +2358,7 @@ input, select, textarea {
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #942833;
+			border-color: #2277AF;
 		}
 
 	input[type="checkbox"] + label:before {
@@ -2855,8 +2855,8 @@ input, select, textarea {
 		input[type="button"]:active,
 		.button:hover,
 		.button:active {
-			box-shadow: inset 0 0 0 1px #942833;
-			color: #942833 !important;
+			box-shadow: inset 0 0 0 1px #2277AF;
+			color: #2277AF !important;
 		}
 
 		input[type="submit"]:active,
@@ -2898,7 +2898,7 @@ input, select, textarea {
 		input[type="reset"].primary,
 		input[type="button"].primary,
 		.button.primary {
-			background-color: #942833;
+			background-color: #2277AF;
 			box-shadow: none;
 			color: #ffffff !important;
 		}
@@ -2907,14 +2907,14 @@ input, select, textarea {
 			input[type="reset"].primary:hover,
 			input[type="button"].primary:hover,
 			.button.primary:hover {
-				background-color: #942833;
+				background-color: #2277AF;
 			}
 
 			input[type="submit"].primary:active,
 			input[type="reset"].primary:active,
 			input[type="button"].primary:active,
 			.button.primary:active {
-				background-color: #942833;
+				background-color: #2277AF;
 			}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,
@@ -3139,15 +3139,15 @@ input, select, textarea {
 		}
 
 		.spotlight.style1 .content {
-			border-color: #942833;
+			border-color: #2277AF;
 		}
 
 		.spotlight.style2 .content {
-			border-color: #942833;
+			border-color: #2277AF;
 		}
 
 		.spotlight.style3 .content {
-			border-color: #942833;
+			border-color: #2277AF;
 		}
 
 		.spotlight.inactive .content {
@@ -3201,7 +3201,7 @@ input, select, textarea {
 	}
 
 		.wrapper.style2 {
-			background: #942833;
+			background: #2277AF;
 		}
 
 			.wrapper.style2 input[type="text"]:focus,
@@ -3236,7 +3236,7 @@ input, select, textarea {
 			.wrapper.style2 input[type="button"].primary,
 			.wrapper.style2 .button.primary {
 				background-color: #ffffff;
-				color: #942833 !important;
+				color: #2277AF !important;
 			}
 
 				.wrapper.style2 input[type="submit"].primary:hover, .wrapper.style2 input[type="submit"].primary:active,
@@ -3340,7 +3340,7 @@ input, select, textarea {
 			}
 
 			.dropotron > li.active > a, .dropotron > li.active > span {
-				color: #8a0004;
+				color: #2277AF;
 			}
 
 		.dropotron.level-0 {
@@ -3430,7 +3430,7 @@ input, select, textarea {
 						}
 
 					#header nav ul li.active > a, #header nav ul li.active > span {
-						color: #942833;
+						color: #2277AF;
 					}
 
 					#header nav ul li > ul {
@@ -3930,7 +3930,7 @@ input, select, textarea {
 					}
 
 					#titleBar .toggle:before {
-						background: #942833;
+						background: #2277AF;
 						color: rgba(255, 255, 255, 0.5);
 						content: '\f0c9';
 						display: block;
@@ -4109,3 +4109,15 @@ input, select, textarea {
 					}
 
 	}
+	.fc-day {
+		background-color: #ffffff; /* Cambia el color de fondo a tu elección */
+		color: #000000; /* Cambia el color del texto a tu elección */
+	  }
+	  .fc-today {
+		 /* Cambia el color de fondo del día actual a tu elección */
+		color: #000000; /* Cambia el color del texto del día actual a tu elección */
+	  }
+	  .fc-highlight{
+		background-color: #00000000;
+	  }
+	  

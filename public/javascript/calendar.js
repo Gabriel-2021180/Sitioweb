@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     eventClick: function (info) {
       openEventModal(info.event);
     },
+    
     events: function (info, successCallback, failureCallback) {
       fetch('/citasJSON')
         .then((response) => {
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
           failureCallback(error);
         });
     },
+   
   });
 
   calendar.render();
