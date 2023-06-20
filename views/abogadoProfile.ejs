@@ -58,14 +58,14 @@
           <img class="image left" src="<%= abogado.image %>" alt="Imagen de <%= abogado.nombres %> <%= abogado.apellidos %>">
           <div class="info">
             <div class="nombre"><%= abogado.nombres %> <%= abogado.apellidos %></div>
-            <div class="descripcion"><%= abogado.descripcion %></div>
+            <div class="descripcion">Descripcion: <%= abogado.descripcion %></div>
             <div class="otra-informacion">
               <p>Correo electrónico: <%= abogado.email %></p>
               <p>Teléfono: <%= abogado.phone %></p>
-              <p>Dirección: <%= abogado.direccion %></p>
+              <p>Especialidad: <%= abogado.especialidad %></p>
               <% if (usuarioAutenticado) { %>
                   <form action="/solicitar" method="POST">
-                    <h4>Realizame una consulta</h4>
+                    <h4>Solicitar Como abogado</h4>
                     <input type="hidden" name="abogadoId" value="<%= abogado._id %>">
                     <textarea name="mensaje" placeholder="Escribe tu mensaje"></textarea>
                     <select name="tipo" required>

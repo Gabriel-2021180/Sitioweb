@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/sass/main.scss">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <noscript><link rel="stylesheet" href="/public/css/noscript.css" /></noscript>
   <title>Miembros del Bufete</title>
   <style>
@@ -90,7 +91,7 @@
             <img src="<%= abogado.image %>" alt="Imagen de <%= abogado.nombres %> <%= abogado.apellidos %>">
             <div class="info">
               <div class="nombre"><%= abogado.nombres %> <%= abogado.apellidos %></div>
-              <div class="descripcion"><%= abogado.descripcion %></div>
+              <div class="descripcion"><%= abogado.especialidad %></div>
               <a class="button fit" href="/perfil/<%= abogado._id %>">Ver Perfil</a>
             </div>
           </div>
@@ -101,6 +102,17 @@
   </section>
   
 </div>
+<script>
+  // Aquí puedes poner el código para mostrar el SweetAlert
+  <% if (locals.error_msg && locals.error_msg.length > 0) { %>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '<%= error_msg %>',
+  })
+<% } %>
+
+</script>
 </body>
 <!-- Scripts -->
 <script src="/javascript/jquery.min.js"></script>

@@ -18,9 +18,12 @@ const userSchema = new Schema({
   password: String,
   image: String,
   emailVerificationToken: String,
+  resetPasswordToken: String,
+    resetPasswordExpires: Date,
   //rol o el nombre que le vayan a poner: Int o bool no se cuántos tipos van a haber
   emailVerified: { type: Boolean, default: false },
   seekingReplacementLawyer: { type: Boolean, default: false }
+  
 });
 
 userSchema.methods.encryptPassword = async (password) => {
@@ -37,14 +40,17 @@ userSchema.methods.comparePassword = async function (password) {
 userSchema.pre('save', async function (next) {
   if (this.isModified('password') || this.isNew) {
     try {
-      this.password = await this.encryptPassword(this.password);
-      next();
+        // Comprueba si la contraseña ya está encriptada
+        if (!this.password.startsWith('$2b$')) {
+            this.password = await this.encryptPassword(this.password);
+        }
+        next();
     } catch (error) {
-      next(error);
+        next(error);
     }
-  } else {
+} else {
     next();
-  }
+}
 });
 
 // Eliminar el índice único del campo nombres

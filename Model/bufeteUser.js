@@ -10,6 +10,7 @@ const bufeteUserSchema = new Schema({
     username: {type:String,required:true,unique:true},
     ci: {type:String,required:true,unique:true},
     direccion: {type:String,required:true},
+    descripcion: {type:String},
     rol: {type: String, required: true},
     fechanac: {type: Date, required: true},
     phone: {type:String,required:true,unique:true},
@@ -18,6 +19,7 @@ const bufeteUserSchema = new Schema({
     image: String,
     emailVerificationToken: String,
     estado: {type:Boolean, default:true},
+    especialidad: { type: String},
     emailVerified: { type: Boolean, default: false },
 });
 

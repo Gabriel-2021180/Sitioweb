@@ -157,5 +157,11 @@ router.get('/citasJSON', citasController.getCitasJSON);
 router.post('/profile/edit', LoginController.isAuthenticated, upload.single('editimage'), SignupController.postEditUser);
 //solicitar abogado de remplazo
 router.post('/solicitud-abogado-reemplazo', LoginController.isAuthenticated, BufeteUserController.postSolicitudAbogadoReemplazo);
+//olvide mi contraseña
+const forgotPasswordController = require('../Controller/forgotPasswordController');
+router.get('/forgot-password', forgotPasswordController.getForgotPassword);
+router.post('/forgot-password', forgotPasswordController.postForgotPassword);
+router.get('/reset-password', forgotPasswordController.getResetPassword);
+router.post('/reset-password', forgotPasswordController.postResetPassword);
 
 module.exports = router;

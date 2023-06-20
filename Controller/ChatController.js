@@ -24,13 +24,13 @@ const chat = async (req, res) => {
       return res.status(404).json({ message: "Caso no encontrado." });
     }
 
-    let context = `Soy un abogado asistente de inteligencia artificial y estoy aquí para ayudar con el caso de ${user.nombres} ${user.apellidos}.\n`;
-    context += `El caso se llama "${caso.nombrecaso}" y aquí está su descripción: ${caso.descripcion}\n`;
-    context += `Hasta ahora, estas son las observaciones que se han hecho sobre el caso:\n`;
+    let context = `Eres un abogado asistente de inteligencia artificial y estas aquí para ayudarme, soy ${user.nombres} ${user.apellidos}.\n`;
+    context += `El caso se llama "${caso.nombrecaso}" y aquí está su descripción: ${caso.descripcion}.\n`;
+    context += `Hasta ahora, estas son las observaciones que se han hecho sobre mi caso:\n`;
     for (let i = 0; i < caso.observaciones.length; i++) {
       context += `- Observación ${i+1}: ${caso.observaciones[i]}\n`;
     }
-    context += `Ahora, ${user.nombres} me ha hecho la siguiente pregunta: ${userMessage}\n`;
+    context += `Ahora te hago la siguiente pregunta: "${userMessage}"`;
 
     const openai = new OpenAIApi(configuration);
     const response = await openai.createCompletion({

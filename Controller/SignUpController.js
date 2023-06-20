@@ -208,6 +208,7 @@ exports.postSignup = async (req, res) => {
   };
 
 async function uploadFile(file) {
+  
     const now = moment().format('YYYYMMDD_HHmmss');
     const bucket = storage.bucket('primerstorage');
     const fileName = `${now}_${file.originalname}`;
@@ -254,6 +255,7 @@ console.log(userId)
 
   if (req.file) {
     const url = await uploadFile(req.file);
+    console.log(req.file)
     user.image = url;
   }
 

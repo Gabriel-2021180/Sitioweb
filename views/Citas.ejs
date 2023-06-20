@@ -31,22 +31,7 @@
       
       
     
-<div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="xclose">&times;</span>
-      <h2>Crear Cita</h2>
-      <form>
-        <label for="title">Motivo de la cita:</label>
-        <input type="text" id="title" name="motivo" required />
-        <label for="date">Fecha:</label>
-        <input type="text" id="date" name="fecha" readonly />
-        <label for="time">Hora Inicio (HH:mm):</label>
-        <label for="time">Hora Fin (HH:mm):</label>
-        <input type="time" id="time" name="hora" min="08:00" max="18:00" step="1800" required />
-        <button type="submit" id="save-event">Guardar</button>
-      </form>
-    </div>
-  </div>
+
   <style>
  .fc-day {
     background-color: #FFFF;
@@ -106,6 +91,7 @@
       <p id="eventHora"></p>
       <p id="eventHoraFin"></p>
       <p id="eventabogado"></p>
+
       <p id="eventEstado"></p>
     </div>
   </div>
