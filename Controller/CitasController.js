@@ -38,26 +38,4 @@ const Cita = require('../Model/citas');
       console.error('Error al obtener las citas:', error);
       res.status(500).json({ message: 'Error al obtener las citas' });
     }
-  };
-  
-  
-  
-  
-  
-  function getEstadoCita(cita) {
-    // Obtener la fecha y hora actual en UTC con moment.js
-    const fechaActual = moment.utc();
-  
-    // Crear objetos moment.js para la hora de inicio y fin de la cita en UTC
-    const fechaCita = moment.utc(cita.fecha);
-    const horaInicio = fechaCita.clone().hour(cita.hora.split(':')[0]).minute(cita.hora.split(':')[1]);
-    const horaFin = fechaCita.clone().hour(cita.horaFin.split(':')[0]).minute(cita.horaFin.split(':')[1]);
-  
-    if (fechaActual.isBefore(horaInicio)) {
-      return 'Pendiente';
-    } else if (fechaActual.isBetween(horaInicio, horaFin)) {
-      return 'En curso';
-    } else {
-      return 'Terminada';
-    }
-  }
+};
