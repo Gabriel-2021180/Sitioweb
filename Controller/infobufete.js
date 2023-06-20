@@ -7,7 +7,7 @@ exports.getAbogados = async (req, res) => {
     const user = req.user;
     const seekingReplacementLawyer = user && user.seekingReplacementLawyer ? user.seekingReplacementLawyer : false;
 
-    const abogados = await BufeteUser.find({}).select('-password -emailVerified -direccion -ci');
+    const abogados = await BufeteUser.find({estado:true}).select('-password -emailVerified -direccion -ci');
     res.render('abogados', { abogados, user, seekingReplacementLawyer }); 
   } catch (error) {
     console.error('Error al obtener los datos de los abogados:', error);
@@ -47,10 +47,31 @@ exports.postSolicitudAbogado = async (req, res) => {
     const { abogadoId, mensaje,tipo } = req.body;
     const clienteId = req.user._id;
 
-    // Verifica si ya existe una solicitud de este cliente a este abogado
-    const solicitudExistente = await SolicitudAbogado.findOne({ abogado: abogadoId, cliente: clienteId });
+    // Verifica si ya existe una solicitud de este cliente a este abogado en el mismo día
+    const startOfDay = new Date();
+    startOfDay.setHours(0,0,0,0);
+    const endOfDay = new Date();
+    endOfDay.setHours(23,59,59,999);
+
+    const solicitudExistente = await SolicitudAbogado.findOne({
+      abogado: abogadoId,
+      cliente: clienteId,
+      fecha: { $gte: startOfDay, $lt: endOfDay }
+    });
+
     if (solicitudExistente) {
-      req.flash('error_msg', 'Ya has enviado una solicitud a este abogado. Por favor, espera su respuesta.');
+      req.flash('error_msg', 'Ya has enviado una solicitud a este abogado hoy. Por favor, intenta de nuevo mañana.');
+      return res.redirect('/abogados');
+    }
+
+    // Verifica si el cliente ya ha hecho 4 solicitudes hoy
+    const solicitudesHoy = await SolicitudAbogado.find({
+      cliente: clienteId,
+      fecha: { $gte: startOfDay, $lt: endOfDay }
+    });
+
+    if (solicitudesHoy.length >= 4) {
+      req.flash('error_msg', 'Has alcanzado el límite de 4 solicitudes por día. Por favor, intenta de nuevo mañana.');
       return res.redirect('/abogados');
     }
 
@@ -72,6 +93,7 @@ exports.postSolicitudAbogado = async (req, res) => {
     res.redirect('/abogados');
   }
 };
+
 
   exports.postSolicitudAbogadoReemplazo = async (req, res) => {
     try {
