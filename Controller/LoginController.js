@@ -16,7 +16,13 @@ exports.postLogin = async (req, res, next) => {
     const { username } = req.body;
 
     try {
-        const user = await User.findOne({ username, estado:true });
+        // Buscar por nombre de usuario o correo electrónico
+        const user = await User.findOne({ 
+            $or: [
+                { username: username, estado: true },
+                { email: username, estado: true }
+            ]
+        });
 
         if (!user) {
             req.flash('error_msg', 'Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
@@ -43,6 +49,7 @@ exports.postLogin = async (req, res, next) => {
         res.redirect('/');
     }
 };
+
 
 
   

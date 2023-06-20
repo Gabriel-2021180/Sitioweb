@@ -5,7 +5,13 @@ module.exports = function(passport) {
     passport.use(
         new LocalStrategy({ usernameField: 'username' }, async (username, password, done) => {
           try {
-            const user = await User.findOne({ username });
+            // Buscar usuario por nombre de usuario o correo electrónico
+            const user = await User.findOne({ 
+                $or: [
+                    { username: username },
+                    { email: username }
+                ]
+            });
       
             if (!user) {
               console.log('Usuario no encontrado');

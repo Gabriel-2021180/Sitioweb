@@ -57,15 +57,18 @@
       <h3>S.H.A.R.K.</h3>
       <h3>Inicio de sesión</h3>
 
-      <label for="username">Nombre de usuario</label>
-      <input type="text" name="username" maxlength="20" placeholder="Usuario123" id="username" <% if (disableInputs) { %>disabled<% } %>>
+      <label for="username">Nombre de usuario o Correo</label>
+      <input type="text" name="username" maxlength="90" placeholder="Usuario123" id="username" <% if (disableInputs) { %>disabled<% } %>>
 
       <label for="password">Contraseña</label>
       <input type="password" name="password" placeholder="Contraseña123" id="password" <% if (disableInputs) { %>disabled<% } %>>
       <span><i class="fa fa-eye" aria-hidden="true" maxlength="20" type="button" id="eye" onclick="togglePassword()"></i></span>
       <div class="go"><i class="">Bienvenid@! eres nuev@?</i><a href="/signup"> Registrate aqui</a></div>
       <a href="/forgot-password">Olvide mi Contraseña</a>
+    <!--
       <button type="submit" class="g-recaptcha" data-sitekey="6LdOEXYmAAAAANFTapbBhTFdgaIA1E9zs5hcJ2Zy" data-callback="onSubmit" <%= error && error.length > 0 && error[0].startsWith('Demasiadas solicitudes') ? 'disabled' : '' %> > Iniciar sesión </button>
+      -->
+      <button type="submit"  data-callback="onSubmit" <%= error && error.length > 0 && error[0].startsWith('Demasiadas solicitudes') ? 'disabled' : '' %> > Iniciar sesión </button>
       <div class="">
         
         <div class="go"><a href="/index">Volver</a></div>
